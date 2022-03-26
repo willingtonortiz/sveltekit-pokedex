@@ -7,5 +7,5 @@
 </script>
 
 <div class="rounded-full p-1.5" style="background-color: {color};">
-	<img class="w-4 h-4" src={`/static/icons/${type}.png`} alt={type} />
+	<img class="w-4 h-4" src={`/icons/${type}.png`} alt={type} />
 </div>
