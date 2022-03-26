@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { TOTAL_ITEMS } from '$lib/utils/constants';
 import { fetchAllPokemons, fetchPokemonByName } from '$lib/api/pokemon.service';
-import type { PaginatedPokemons } from '$lib/pokemon.types';
+import type { PaginatedPokemons, PokemonResponse } from '$lib/pokemon.types';
 
 export const get: RequestHandler = async ({ url }) => {
 	const pageStr = url.searchParams.get('page');
@@ -15,12 +15,24 @@ export const get: RequestHandler = async ({ url }) => {
 	);
 
 	const pokemons = await Promise.all(pokemonUrls);
+	const cleanedPokemons: PokemonResponse[] = pokemons.map((pokemon) => ({
+		id: pokemon.id,
+		name: pokemon.name,
+		abilities: pokemon.abilities,
+		forms: pokemon.forms,
+		height: pokemon.height,
+		imageUrl: pokemon.imageUrl,
+		is_default: pokemon.is_default,
+		stats: pokemon.stats,
+		types: pokemon.types,
+		weight: pokemon.weight
+	}));
 
 	const paginatedPokemons: PaginatedPokemons = {
 		count: paginatedResults.count,
 		next: paginatedResults.next,
 		previous: paginatedResults.previous,
-		results: pokemons
+		results: cleanedPokemons
 	};
 
 	return {
