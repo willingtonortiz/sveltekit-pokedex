@@ -26,6 +26,64 @@ const getGenderStrFromId = (id: number) => {
 	return 'male';
 };
 
+// 0 0 20px #5fbd58
+const pokemonTypeToColor = (type: string) => {
+	if (type === 'bug') {
+		return '#92bc2c';
+	}
+	if (type === 'dark') {
+		return '#595761';
+	}
+	if (type === 'dragon') {
+		return '#0c69c8';
+	}
+	if (type === 'electric') {
+		return '#f2d94e';
+	}
+	if (type === 'fairy') {
+		return '#ee90e6';
+	}
+	if (type === 'fighting') {
+		return '#d3425f';
+	}
+	if (type === 'fire') {
+		return '#fba54c';
+	}
+	if (type === 'flying') {
+		return '#a1bbec';
+	}
+	if (type === 'ghost') {
+		return '#5f6dbc';
+	}
+	if (type === 'grass') {
+		return '#5fbd58';
+	}
+	if (type === 'ground') {
+		return '#da7c4d';
+	}
+	if (type === 'ice') {
+		return '#75d0c1';
+	}
+	if (type === 'normal') {
+		return '#a0a29f';
+	}
+	if (type === 'poison') {
+		return '#b763cf';
+	}
+	if (type === 'psychic') {
+		return '#fa8581';
+	}
+	if (type === 'rock') {
+		return '#c9bb8a';
+	}
+	if (type === 'steel') {
+		return '#5695a3';
+	}
+	if (type === 'water') {
+		return '#539ddf';
+	}
+};
+
 const pokemonColorToColor = (color: string) => {
 	if (color === 'green') {
 		return '#81c784';
@@ -81,5 +139,6 @@ export {
 	getPokemonImageUrlFromUrl,
 	getPokemonThumbnailUrlFromUrl,
 	capitalizeText,
-	getGenderStrFromId
+	getGenderStrFromId,
+	pokemonTypeToColor
 };

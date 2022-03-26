@@ -1,31 +1,29 @@
 <script lang="ts">
-	import type { PokemonItem } from '$lib/pokemon.types';
-	import { capitalizeText, getPokemonIdFromUrl, getPokemonThumbnailUrl } from '$lib/utils/utils';
+	import { createDefaultPokemonResponse, type PokemonResponse } from '$lib/pokemon.types';
+	import { capitalizeText, getPokemonThumbnailUrl } from '$lib/utils/utils';
+	import PokemonTypeIcon from './PokemonTypeIcon.svelte';
 
-	export let pokemon: PokemonItem = { name: '', url: '' };
-	let pokemonId = 0;
-
-	$: {
-		pokemonId = getPokemonIdFromUrl(pokemon.url);
-	}
+	export let pokemon: PokemonResponse = createDefaultPokemonResponse();
 </script>
 
 <a href={`/${pokemon.name}`}>
 	<div
-		class="cursor-pointer border p-1 transition-all flex flex-col flex-nowrap items-center gap-1 hover:bg-gray-100"
+		class="h-full cursor-pointer border p-1 transition-all flex flex-col flex-nowrap items-center gap-1 hover:bg-gray-100"
 	>
 		<div class="w-full flex flex-row flex-nowrap justify-between">
-			<p class="text-3xl">{pokemonId}</p>
+			<div class="flex-1 flex flex-col flex-nowrap">
+				<p class="text-3xl">{pokemon.id}</p>
 
-			<p>+</p>
+				<p class="text-lg">{capitalizeText(pokemon.name)}</p>
+			</div>
+
+			<div class="flex flex-col flex-nowrap gap-1">
+				{#each pokemon.types as type}
+					<PokemonTypeIcon type={type.type.name} />
+				{/each}
+			</div>
 		</div>
 
-		<div class="w-full flex flex-row flex-nowrap justify-between">
-			<p class="text-lg">{capitalizeText(pokemon.name)}</p>
-
-			<p>+</p>
-		</div>
-
-		<img class="w-20 mb-8" src={getPokemonThumbnailUrl(pokemonId)} alt={pokemon.name} />
+		<img class="w-20 mb-8" src={getPokemonThumbnailUrl(pokemon.id)} alt={pokemon.name} />
 	</div>
 </a>

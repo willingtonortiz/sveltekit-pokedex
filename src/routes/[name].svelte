@@ -1,10 +1,10 @@
 <script lang="ts" context="module">
 	import type { Load } from '@sveltejs/kit';
 	import {
-		createDefaultPokemon,
+		createDefaultPokemonResponse,
 		createDefaultPokemonSpecies,
 		type EvolutionChainItem,
-		type Pokemon,
+		type PokemonResponse,
 		type PokemonSpecies
 	} from '$lib/pokemon.types';
 
@@ -42,7 +42,7 @@
 	import Chip from '../components/Chip.svelte';
 	import LeftArrowIcon from '../components/icons/LeftArrowIcon.svelte';
 
-	export let pokemon: Pokemon = createDefaultPokemon();
+	export let pokemon: PokemonResponse = createDefaultPokemonResponse();
 	export let pokemonSpecies: PokemonSpecies = createDefaultPokemonSpecies();
 	export let evolutionChainList: EvolutionChainItem[] = [];
 	$: primaryColor = pokemonSpecies.color.name;

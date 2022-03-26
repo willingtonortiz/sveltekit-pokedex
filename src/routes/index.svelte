@@ -34,7 +34,12 @@
 	import PokemonItem from '../components/PokemonItem.svelte';
 
 	const PAGE_SIZE = 40;
-	export let pokemons: PaginatedPokemons = { count: 0, next: null, previous: null, results: [] };
+	export let pokemons: PaginatedPokemons = {
+		count: 0,
+		next: null,
+		previous: null,
+		results: []
+	};
 	export let currentPage = 1;
 	let totalItems = pokemons.count;
 	$: items = pokemons.results;

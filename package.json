@@ -35,6 +35,7 @@
   },
   "type": "module",
   "dependencies": {
+    "node-cache": "^5.1.2",
     "svelte-paginate": "^0.0.1"
   }
 }

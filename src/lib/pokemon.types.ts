@@ -1,4 +1,4 @@
-export type PaginatedPokemons = {
+export type PaginatedPokemonsResponse = {
 	count: number;
 	next: string | null;
 	previous: string | null;
@@ -10,7 +10,7 @@ export type PokemonItem = {
 	url: string;
 };
 
-export type Pokemon = {
+export type PokemonResponse = {
 	id: number;
 	name: string;
 	imageUrl: string;
@@ -23,6 +23,13 @@ export type Pokemon = {
 	stats: Stat[];
 };
 
+export type PaginatedPokemons = {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: PokemonResponse[];
+};
+
 export type Ability = {
 	ability: { name: string; url: string };
 	is_hidden: boolean;
@@ -31,8 +38,28 @@ export type Ability = {
 
 export type Type = {
 	slot: number;
-	type: { name: string; url: string };
+	type: { name: PokemonTypes; url: string };
 };
+
+export type PokemonTypes =
+	| 'bug'
+	| 'dark'
+	| 'dragon'
+	| 'electric'
+	| 'fairy'
+	| 'fighting'
+	| 'fire'
+	| 'flying'
+	| 'ghost'
+	| 'grass'
+	| 'ground'
+	| 'ice'
+	| 'normal'
+	| 'poison'
+	| 'psychic'
+	| 'rock'
+	| 'steel'
+	| 'water';
 
 export type Form = {
 	name: string;
@@ -48,7 +75,7 @@ export type Stat = {
 	};
 };
 
-export const createDefaultPokemon = (): Pokemon => {
+export const createDefaultPokemonResponse = (): PokemonResponse => {
 	return {
 		id: 0,
 		name: '',

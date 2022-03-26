@@ -1,22 +1,30 @@
 import type { RequestHandler } from '@sveltejs/kit';
-
-const BASE_URL = 'https://pokeapi.co/api/v2';
-const POKEMON_URL = `${BASE_URL}/pokemon`;
-const PAGE_SIZE = 40;
-const TOTAL_ITEMS = 807;
+import { TOTAL_ITEMS } from '$lib/utils/constants';
+import { fetchAllPokemons, fetchPokemonByName } from '$lib/api/pokemon.service';
+import type { PaginatedPokemons } from '$lib/pokemon.types';
 
 export const get: RequestHandler = async ({ url }) => {
 	const pageStr = url.searchParams.get('page');
 	const page = parseInt(pageStr ?? '1');
 
-	const offset = (page - 1) * PAGE_SIZE;
+	const paginatedResults = await fetchAllPokemons({ page });
+	paginatedResults.count = TOTAL_ITEMS;
 
-	const response = await fetch(`${POKEMON_URL}?limit=${PAGE_SIZE}&offset=${offset}`);
-	const data = await response.json();
-	data.count = TOTAL_ITEMS;
+	const pokemonUrls = paginatedResults.results.map((pokemon) =>
+		fetchPokemonByName({ name: pokemon.name })
+	);
+
+	const pokemons = await Promise.all(pokemonUrls);
+
+	const paginatedPokemons: PaginatedPokemons = {
+		count: paginatedResults.count,
+		next: paginatedResults.next,
+		previous: paginatedResults.previous,
+		results: pokemons
+	};
 
 	return {
 		status: 200,
-		body: data
+		body: paginatedPokemons
 	};
 };
