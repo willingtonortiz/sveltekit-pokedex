@@ -6,6 +6,6 @@
 	let color = pokemonTypeToColor(type);
 </script>
 
-<div class="rounded-full p-1.5" style="background-color: {color};">
-	<img class="w-4 h-4" src={`/icons/${type}.png`} alt={type} />
+<div class="w-max rounded-full p-1.5" style="background-color: {color};">
+	<img class="block w-4 h-4" src={`/icons/${type}.png`} alt={type} />
 </div>

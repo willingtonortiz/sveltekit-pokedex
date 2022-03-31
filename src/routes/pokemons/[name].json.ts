@@ -15,13 +15,18 @@ import {
 } from '$lib/utils/utils';
 import { POKEMON_SPECIES_URL, POKEMON_URL } from '$lib/utils/constants';
 
+// TODO: Get pokemon abilities
+
 export const get: RequestHandler = async ({ params }) => {
 	const name = params.name;
 
 	// Getting pokemon
+	// TODO: Replace by services
 	const pokemonResponse = await fetch(`${POKEMON_URL}/${name}`);
 	const pokemon = await pokemonResponse.json();
 	pokemon.imageUrl = getPokemonImageUrl(pokemon.id);
+
+	pokemon.abilities;
 
 	// Getting pokemon species
 	const pokemonSpeciesResponse = await fetch(`${POKEMON_SPECIES_URL}/${name}`);

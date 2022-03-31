@@ -36,6 +36,12 @@ export type Ability = {
 	slot: number;
 };
 
+export const createDefaultAbility = (): Ability => ({
+	ability: { name: '', url: '' },
+	is_hidden: false,
+	slot: 0
+});
+
 export type Type = {
 	slot: number;
 	type: { name: PokemonTypes; url: string };

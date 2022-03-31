@@ -29,6 +29,8 @@ export const fetchPokemonByName = async ({ name }: { name: string }) => {
 	return cleanedPokemon;
 };
 
+// TODO: Fetch pokemon ability
+
 const cleanPokemon = (pokemon: PokemonResponse) => {
 	return {
 		id: pokemon.id,
